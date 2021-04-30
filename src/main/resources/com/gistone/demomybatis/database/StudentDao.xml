@@ -39,4 +39,12 @@
             </if>
         </trim>
     </insert>
+    <insert id="insertForeach">
+        insert into student ( name, birth
+        )
+        values
+        <foreach collection="studentList" item="student" separator=",">
+            ( #{name,jdbcType=VARCHAR}, #{birth,jdbcType=INTEGER} )
+        </foreach>
+    </insert>
 </mapper>

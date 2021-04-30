@@ -14,7 +14,12 @@ POST http://localhost:7999/api/generateStatistic
 Content-Type: application/json
 
 [
-  1
+  1,
+  10,
+  100,
+  1000,
+  10000,
+  1000
 ]
 
 ###

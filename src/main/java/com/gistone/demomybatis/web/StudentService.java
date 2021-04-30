@@ -8,6 +8,7 @@ import com.gistone.demomybatis.web.vo.InsertResult;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StopWatch;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -49,6 +50,46 @@ public class StudentService {
 
     private void generateStatisticOne(Integer total) {
         InsertResult insertResult = insertN(total);
+
+        InsertStatistic insertStatistic = new InsertStatistic();
+        insertStatistic.setInsertCount(Long.valueOf(total));
+        insertStatistic.setInsertTime(Math.toIntExact(insertResult.getInsertTime()));
+        insertStatistic.setTableName("student");
+        insertStatisticDao.insert(insertStatistic);
+    }
+
+    private InsertResult insertNForeach(Integer total, Integer batchSize) {
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+
+        int page = total / batchSize + 1;
+        for (int i = 0; i < page; i++) {
+            if (i == page - 1) {
+                int lastPack = total - page * batchSize;
+                insertNForeachPack(lastPack);
+            } else {
+                insertNForeachPack(batchSize);
+            }
+        }
+
+        stopWatch.stop();
+
+        InsertResult insertResult = new InsertResult();
+        insertResult.setInsertTime(stopWatch.getTotalTimeMillis());
+        return insertResult;
+    }
+
+    private void insertNForeachPack(int n) {
+        List<Student> students = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            students.add(Student.randOne());
+        }
+        studentDao.insertForeach(students);
+    }
+
+    public void generateStatisticForeach(Integer total, Integer batchSize) {
+
+        InsertResult insertResult = insertNForeach(total, batchSize);
 
         InsertStatistic insertStatistic = new InsertStatistic();
         insertStatistic.setInsertCount(Long.valueOf(total));

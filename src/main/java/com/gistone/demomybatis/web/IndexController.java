@@ -2,6 +2,7 @@ package com.gistone.demomybatis.web;
 
 
 import com.gistone.demomybatis.web.vo.InsertResult;
+import com.gistone.demomybatis.web.vo.PackInfo;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,6 +40,12 @@ public class IndexController {
     public String g37(@RequestBody List<Integer> totalList) {
         studentService.generateStatistic(totalList);
         return "感谢等待, 生成数据完成, 请在数据库查看";
+    }
+
+    @PostMapping("/generateStatisticForeach")
+    public String g45(@RequestBody PackInfo packInfo) {
+        studentService.generateStatisticForeach(packInfo.getTotal(), packInfo.getPackSize());
+        return "感谢等待, pack生成数据完成, 请在数据库查看";
     }
 
 
