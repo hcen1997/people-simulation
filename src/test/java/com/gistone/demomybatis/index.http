@@ -4,3 +4,6 @@ GET http://localhost:7999/api/insertOneStudent
 GET http://localhost:7999/api/insertTenStudent
 
 ###
+GET http://localhost:7999/api/insertNStudent/15
+
+###
