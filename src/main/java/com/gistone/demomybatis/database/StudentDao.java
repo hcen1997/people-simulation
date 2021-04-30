@@ -1,5 +1,6 @@
 package com.gistone.demomybatis.database;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,5 +11,5 @@ public interface StudentDao {
 
     int insertSelective(Student record);
 
-    int insertForeach(List<Student> studentList);
+    int insertForeach(@Param("studentList") List<Student> studentList);
 }
