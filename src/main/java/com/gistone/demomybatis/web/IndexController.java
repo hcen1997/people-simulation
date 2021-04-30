@@ -23,7 +23,7 @@ public class IndexController {
     public InsertResult in10() {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
-        long insert = studentService.insert(Student.randOne());
+        Long insert = studentService.insert(Student.randOne());
         stopWatch.stop();
         return new InsertResult(
                 stopWatch.getTotalTimeMillis(),
@@ -38,7 +38,7 @@ public class IndexController {
         final int total = 10;
         InsertResult insertResult = new InsertResult();
         for (int i = 0; i < total; i++) {
-            long insert = studentService.insert(Student.randOne());
+            Long insert = studentService.insert(Student.randOne());
             insertResult.add(insert);
         }
         stopWatch.stop();

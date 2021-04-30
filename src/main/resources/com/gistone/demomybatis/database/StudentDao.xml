@@ -6,7 +6,9 @@
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="birth" jdbcType="INTEGER" property="birth"/>
     </resultMap>
-    <insert id="insert" parameterType="com.gistone.demomybatis.database.Student">
+    <insert id="insert"
+            keyColumn="id" keyProperty="id"
+            parameterType="com.gistone.demomybatis.database.Student">
         insert into student ( name, birth
         )
         values ( #{name,jdbcType=VARCHAR}, #{birth,jdbcType=INTEGER}
