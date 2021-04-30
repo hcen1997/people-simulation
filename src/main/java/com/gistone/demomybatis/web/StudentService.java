@@ -1,6 +1,7 @@
 package com.gistone.demomybatis.web;
 
 import com.gistone.demomybatis.database.InsertStatistic;
+import com.gistone.demomybatis.database.InsertStatisticDao;
 import com.gistone.demomybatis.database.Student;
 import com.gistone.demomybatis.database.StudentDao;
 import com.gistone.demomybatis.web.vo.InsertResult;
@@ -13,9 +14,11 @@ import java.util.List;
 public class StudentService {
 
     private final StudentDao studentDao;
+    private final InsertStatisticDao insertStatisticDao;
 
-    public StudentService(StudentDao studentDao) {
+    public StudentService(StudentDao studentDao, InsertStatisticDao insertStatisticDao) {
         this.studentDao = studentDao;
+        this.insertStatisticDao = insertStatisticDao;
     }
 
     public Long insert(Student student) {
@@ -50,6 +53,7 @@ public class StudentService {
         InsertStatistic insertStatistic = new InsertStatistic();
         insertStatistic.setInsertCount(Long.valueOf(total));
         insertStatistic.setInsertTime(Math.toIntExact(insertResult.getInsertTime()));
-
+        insertStatistic.setTableName("student");
+        insertStatisticDao.insert(insertStatistic);
     }
 }
