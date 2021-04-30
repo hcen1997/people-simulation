@@ -1,10 +1,13 @@
 package com.gistone.demomybatis.web;
 
+import com.gistone.demomybatis.database.InsertStatistic;
 import com.gistone.demomybatis.database.Student;
 import com.gistone.demomybatis.database.StudentDao;
 import com.gistone.demomybatis.web.vo.InsertResult;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StopWatch;
+
+import java.util.List;
 
 @Service
 public class StudentService {
@@ -33,5 +36,20 @@ public class StudentService {
 
 
         return insertResult;
+    }
+
+    public void generateStatistic(List<Integer> totalList) {
+        for (Integer integer : totalList) {
+            generateStatisticOne(integer);
+        }
+    }
+
+    private void generateStatisticOne(Integer total) {
+        InsertResult insertResult = insertN(total);
+
+        InsertStatistic insertStatistic = new InsertStatistic();
+        insertStatistic.setInsertCount(Long.valueOf(total));
+        insertStatistic.setInsertTime(Math.toIntExact(insertResult.getInsertTime()));
+
     }
 }

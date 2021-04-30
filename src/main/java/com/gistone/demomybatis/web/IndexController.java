@@ -2,10 +2,9 @@ package com.gistone.demomybatis.web;
 
 
 import com.gistone.demomybatis.web.vo.InsertResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -34,6 +33,12 @@ public class IndexController {
     public InsertResult in51(@PathVariable("n") int n) {
         InsertResult insertResultAll = studentService.insertN(n);
         return insertResultAll;
+    }
+
+    @PostMapping("/generateStatistic")
+    public String g37(@RequestBody List<Integer> totalList) {
+        studentService.generateStatistic(totalList);
+        return "感谢等待, 生成数据完成, 请在数据库查看";
     }
 
 

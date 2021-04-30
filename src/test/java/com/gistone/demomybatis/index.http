@@ -7,3 +7,14 @@ GET http://localhost:7999/api/insertTenStudent
 GET http://localhost:7999/api/insertNStudent/15
 
 ###
+
+
+### 正式测试, 保存到数据库, 数据就是程序员的生命
+POST http://localhost:7999/api/generateStatistic
+Content-Type: application/json
+
+[
+  1
+]
+
+###
