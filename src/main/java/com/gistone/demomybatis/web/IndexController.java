@@ -2,8 +2,11 @@ package com.gistone.demomybatis.web;
 
 
 import com.gistone.demomybatis.database.Student;
+import com.gistone.demomybatis.web.vo.InsertResult;
+import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 
 @RestController("/api")
 public class IndexController {
@@ -14,8 +17,17 @@ public class IndexController {
         this.studentService = studentService;
     }
 
-    @GetMapping("/insertOne")
-    public long in10() {
-        return studentService.insert(Student.randOne());
+    @GetMapping("/insertOneStudent")
+    public InsertResult in10() {
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        int insert = studentService.insert(Student.randOne());
+        stopWatch.stop();
+
+
+        return new InsertResult(
+                stopWatch.getTotalTimeMillis(),
+                Long.valueOf(insert)
+        );
     }
 }

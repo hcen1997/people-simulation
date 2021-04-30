@@ -9,3 +9,10 @@ server:
 logging:
   level:
     org.springframework.web: debug
+
+debug: on
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: on
+  mapper-locations: classpath:com.gistone.demomybatis.database/*.xml
