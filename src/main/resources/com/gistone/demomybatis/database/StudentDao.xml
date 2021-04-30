@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gistone.demomybatis.database.StudentDao">
+    <resultMap id="BaseResultMap" type="com.gistone.demomybatis.database.Student">
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="birth" jdbcType="INTEGER" property="birth"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.gistone.demomybatis.database.Student">
+        insert into student ( name, birth
+        )
+        values ( #{name,jdbcType=VARCHAR}, #{birth,jdbcType=INTEGER}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.gistone.demomybatis.database.Student">
+        insert into student
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="birth != null">
+                birth,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="birth != null">
+                #{birth,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+</mapper>
