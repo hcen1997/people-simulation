@@ -40,11 +40,9 @@
         </trim>
     </insert>
     <insert id="insertForeach" parameterType="java.util.List">
-        insert into student ( name, birth
-        )
-        values
-        <foreach collection="studentList" item="student" separator=",">
-            ( #{student.name,jdbcType=VARCHAR}, #{student.birth,jdbcType=INTEGER} )
+        insert into student ( `name`, birth ) values
+        <foreach collection="studentList" item="student" separator=",">( #{student.name,jdbcType=VARCHAR},
+            #{student.birth,jdbcType=INTEGER} )
         </foreach>
     </insert>
 </mapper>
