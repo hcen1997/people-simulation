@@ -13,8 +13,8 @@ public class StudentService {
         this.studentDao = studentDao;
     }
 
-    public int insert(Student student) {
+    public Long insert(Student student) {
         int insert = studentDao.insert(student);
-        return insert;
+        return student.getId();
     }
 }
