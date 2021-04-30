@@ -5,6 +5,7 @@ import com.gistone.demomybatis.database.Student;
 import com.gistone.demomybatis.web.vo.InsertResult;
 import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,6 +39,21 @@ public class IndexController {
         final int total = 10;
         InsertResult insertResult = new InsertResult();
         for (int i = 0; i < total; i++) {
+            Long insert = studentService.insert(Student.randOne());
+            insertResult.add(insert);
+        }
+        stopWatch.stop();
+        insertResult.setInsertTime(stopWatch.getTotalTimeMillis());
+
+        return insertResult;
+    }
+
+    @GetMapping("/insertNStudent/{n}")
+    public InsertResult in51(@PathVariable("n") int n) {
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        InsertResult insertResult = new InsertResult();
+        for (int i = 0; i < n; i++) {
             Long insert = studentService.insert(Student.randOne());
             insertResult.add(insert);
         }
