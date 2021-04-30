@@ -1,8 +1,1 @@
 GET http://localhost:7999/api/insertOneStudent
-
-####
-GET http://localhost:7999/insertOneStudent
-
-###
-GET http://localhost:7999/api/insertOneStudent
-GET http://localhost:7999/api/insertOneStudent

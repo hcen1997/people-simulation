@@ -25,11 +25,25 @@ public class IndexController {
         stopWatch.start();
         int insert = studentService.insert(Student.randOne());
         stopWatch.stop();
-
-
         return new InsertResult(
                 stopWatch.getTotalTimeMillis(),
                 Long.valueOf(insert)
         );
+    }
+
+    @GetMapping("/insertTenStudent")
+    public InsertResult in34() {
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        final int total = 10;
+        InsertResult insertResult = new InsertResult();
+        for (int i = 0; i < total; i++) {
+            int insert = studentService.insert(Student.randOne());
+            insertResult.add((long) insert);
+        }
+        stopWatch.stop();
+        insertResult.setInsertTime(stopWatch.getTotalTimeMillis());
+
+        return insertResult;
     }
 }

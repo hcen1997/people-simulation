@@ -12,6 +12,9 @@ public class InsertResult {
     private Long insertTime;
 
 
+    public InsertResult() {
+    }
+
     public InsertResult(Long insertTime, Long... ids) {
         ArrayList<Long> list = new ArrayList<>();
         for (Long id : ids) {
@@ -19,5 +22,12 @@ public class InsertResult {
         }
         this.insertIds = list;
         this.insertTime = insertTime;
+    }
+
+    public void add(Long id) {
+        if (insertIds == null) {
+            insertIds = new ArrayList<>();
+        }
+        insertIds.add(id);
     }
 }
