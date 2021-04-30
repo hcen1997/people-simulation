@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    username: user
+    password: User_123
+    url: jdbc:mysql://192.168.1.199:3306/student?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+
+server:
+  port: 7999
+logging:
+  level:
+    org.springframework.web: debug
