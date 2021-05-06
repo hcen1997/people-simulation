@@ -27,8 +27,8 @@ POST http://localhost:7999/api/generateStatisticForeach
 Content-Type: application/json
 
 {
-  "total": 1000,
-  "packSize": 100
+  "total": 10,
+  "packSize": 2
 }
 
 ###

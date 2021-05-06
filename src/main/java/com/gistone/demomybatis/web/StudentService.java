@@ -85,7 +85,9 @@ public class StudentService {
         for (int i = 0; i < n; i++) {
             students.add(Student.randOne());
         }
-        studentDao.insertForeach(students);
+        if (students.size() > 0) {
+            studentDao.insertForeach(students);
+        }
     }
 
     public void generateStatisticForeach(Integer total, Integer batchSize) {
