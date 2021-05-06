@@ -48,5 +48,11 @@ public class IndexController {
         return "感谢等待, pack生成数据完成, 请在数据库查看";
     }
 
+    @PostMapping("/generateStatisticForeach1w")
+    public String g51(@RequestBody PackInfo packInfo) {
+        studentService.generateStatisticForeach(packInfo.getTotal(), 10000);
+        return "感谢等待, pack生成数据完成, 请在数据库查看";
+    }
+
 
 }

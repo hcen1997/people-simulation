@@ -23,12 +23,11 @@ Content-Type: application/json
 ]
 
 ### 正式测试, pack保存到数据库
-POST http://localhost:7999/api/generateStatisticForeach
+POST http://localhost:7999/api/generateStatisticForeach1w
 Content-Type: application/json
 
 {
-  "total": 10,
-  "packSize": 2
+  "total": 1000000
 }
 
 ###
