@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gistone.demomybatis.database.DeathRateDao">
+    <resultMap id="BaseResultMap" type="com.gistone.demomybatis.database.DeathRate">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="age" jdbcType="INTEGER" property="age"/>
+        <result column="rate_man_not_old_1" jdbcType="VARCHAR" property="rateManNotOld1"/>
+        <result column="rate_woman_not_old_1" jdbcType="VARCHAR" property="rateWomanNotOld1"/>
+        <result column="rate_man_not_old_2" jdbcType="VARCHAR" property="rateManNotOld2"/>
+        <result column="rate_woman_not_old_2" jdbcType="VARCHAR" property="rateWomanNotOld2"/>
+        <result column="rate_man_old" jdbcType="VARCHAR" property="rateManOld"/>
+        <result column="rate_woman_old" jdbcType="VARCHAR" property="rateWomanOld"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, age, rate_man_not_old_1, rate_woman_not_old_1, rate_man_not_old_2, rate_woman_not_old_2,
+        rate_man_old, rate_woman_old
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from death_rate
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from death_rate
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.gistone.demomybatis.database.DeathRate"
+            useGeneratedKeys="true">
+        insert into death_rate (age, rate_man_not_old_1, rate_woman_not_old_1,
+        rate_man_not_old_2, rate_woman_not_old_2, rate_man_old,
+        rate_woman_old)
+        values (#{age,jdbcType=INTEGER}, #{rateManNotOld1,jdbcType=VARCHAR}, #{rateWomanNotOld1,jdbcType=VARCHAR},
+        #{rateManNotOld2,jdbcType=VARCHAR}, #{rateWomanNotOld2,jdbcType=VARCHAR}, #{rateManOld,jdbcType=VARCHAR},
+        #{rateWomanOld,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.gistone.demomybatis.database.DeathRate" useGeneratedKeys="true">
+        insert into death_rate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="age != null">
+                age,
+            </if>
+            <if test="rateManNotOld1 != null">
+                rate_man_not_old_1,
+            </if>
+            <if test="rateWomanNotOld1 != null">
+                rate_woman_not_old_1,
+            </if>
+            <if test="rateManNotOld2 != null">
+                rate_man_not_old_2,
+            </if>
+            <if test="rateWomanNotOld2 != null">
+                rate_woman_not_old_2,
+            </if>
+            <if test="rateManOld != null">
+                rate_man_old,
+            </if>
+            <if test="rateWomanOld != null">
+                rate_woman_old,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="rateManNotOld1 != null">
+                #{rateManNotOld1,jdbcType=VARCHAR},
+            </if>
+            <if test="rateWomanNotOld1 != null">
+                #{rateWomanNotOld1,jdbcType=VARCHAR},
+            </if>
+            <if test="rateManNotOld2 != null">
+                #{rateManNotOld2,jdbcType=VARCHAR},
+            </if>
+            <if test="rateWomanNotOld2 != null">
+                #{rateWomanNotOld2,jdbcType=VARCHAR},
+            </if>
+            <if test="rateManOld != null">
+                #{rateManOld,jdbcType=VARCHAR},
+            </if>
+            <if test="rateWomanOld != null">
+                #{rateWomanOld,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gistone.demomybatis.database.DeathRate">
+        update death_rate
+        <set>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="rateManNotOld1 != null">
+                rate_man_not_old_1 = #{rateManNotOld1,jdbcType=VARCHAR},
+            </if>
+            <if test="rateWomanNotOld1 != null">
+                rate_woman_not_old_1 = #{rateWomanNotOld1,jdbcType=VARCHAR},
+            </if>
+            <if test="rateManNotOld2 != null">
+                rate_man_not_old_2 = #{rateManNotOld2,jdbcType=VARCHAR},
+            </if>
+            <if test="rateWomanNotOld2 != null">
+                rate_woman_not_old_2 = #{rateWomanNotOld2,jdbcType=VARCHAR},
+            </if>
+            <if test="rateManOld != null">
+                rate_man_old = #{rateManOld,jdbcType=VARCHAR},
+            </if>
+            <if test="rateWomanOld != null">
+                rate_woman_old = #{rateWomanOld,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.gistone.demomybatis.database.DeathRate">
+        update death_rate
+        set age = #{age,jdbcType=INTEGER},
+        rate_man_not_old_1 = #{rateManNotOld1,jdbcType=VARCHAR},
+        rate_woman_not_old_1 = #{rateWomanNotOld1,jdbcType=VARCHAR},
+        rate_man_not_old_2 = #{rateManNotOld2,jdbcType=VARCHAR},
+        rate_woman_not_old_2 = #{rateWomanNotOld2,jdbcType=VARCHAR},
+        rate_man_old = #{rateManOld,jdbcType=VARCHAR},
+        rate_woman_old = #{rateWomanOld,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
