@@ -1,6 +1,9 @@
 package com.gistone.demomybatis.database;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface PopulationSexAgeDao {
@@ -15,4 +18,6 @@ public interface PopulationSexAgeDao {
     int updateByPrimaryKeySelective(PopulationSexAge record);
 
     int updateByPrimaryKey(PopulationSexAge record);
+
+    List<PopulationSexAge> queryByYear(@Param("year") int year);
 }

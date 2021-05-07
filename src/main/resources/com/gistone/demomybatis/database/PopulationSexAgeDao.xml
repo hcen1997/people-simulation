@@ -19,6 +19,12 @@
         from population_sex_age
         where id = #{id,jdbcType=INTEGER}
     </select>
+    <select id="queryByYear" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from population_sex_age
+        where data_year = #{year}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete from population_sex_age
         where id = #{id,jdbcType=INTEGER}

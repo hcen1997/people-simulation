@@ -16,6 +16,9 @@ public class IndexController {
     private final StudentService studentService;
     @Autowired
     private DataFileService dataFileService;
+    @Autowired
+    private SimulationService simulationService;
+
 
     public IndexController(StudentService studentService) {
         this.studentService = studentService;
@@ -68,6 +71,12 @@ public class IndexController {
     public String g67() {
         dataFileService.insert2010PopulationDataToDb();
         return "感谢等待, 数据处理完成, 请在数据库查看";
+    }
+
+    @GetMapping("/sim2010")
+    public String s73() {
+        simulationService.sim2010();
+        return "模拟成功";
     }
 
 

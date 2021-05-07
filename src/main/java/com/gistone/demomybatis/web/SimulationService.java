@@ -3,7 +3,9 @@ package com.gistone.demomybatis.web;
 import com.gistone.demomybatis.database.DeathRate;
 import com.gistone.demomybatis.database.DeathRateDao;
 import com.gistone.demomybatis.database.PopulationSexAge;
+import com.gistone.demomybatis.database.PopulationSexAgeDao;
 import com.gistone.demomybatis.web.vo.AgeSexPeople;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -18,6 +20,18 @@ import java.util.Objects;
 @Service
 public class SimulationService {
 
+
+    @Autowired
+    private DeathRateDao deathRateDao;
+    @Autowired
+    private PopulationSexAgeDao populationSexAgeDao;
+
+
+    public void sim2010() {
+        DeathRateTable deathRateTable = new DeathRateTable(deathRateDao);
+        List<PopulationSexAge> populationSexAges = populationSexAgeDao.queryByYear(2010);
+        List<AgeSexPeople> simulation = simulation(populationSexAges, deathRateTable, (long) (1588 * 10000), 117.9);
+    }
 
     /**
      * 算法:
