@@ -2,7 +2,6 @@ package com.gistone.demomybatis;
 
 import org.springframework.util.StopWatch;
 
-import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class SpeadTest {
@@ -16,8 +15,8 @@ public class SpeadTest {
             data[c] = ThreadLocalRandom.current().nextInt() % DATA_STRIDE;
         }
 
-        Arrays.sort(data); // 7.56 s
-
+//        Arrays.sort(data); // 7.56 s
+        // 没有sort 18 s
 
         {  // 测试部分
             StopWatch stopWatch = new StopWatch();
