@@ -1,8 +1,12 @@
 package com.gistone.demomybatis.web;
 
+import com.gistone.demomybatis.database.DeathRate;
+import com.gistone.demomybatis.database.DeathRateDao;
 import com.gistone.demomybatis.database.PopulationSexAge;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -28,7 +32,32 @@ public class SimulationService {
             List<PopulationSexAge> population,
             DeathRateTable deathRateTable,
             Long newBorn) {
-        return null
+
+        return null;
     }
 
+    private class DeathRateTable {
+        HashMap<Integer, DeathRate> integerDeathRateHashMap;
+
+        public DeathRateTable(DeathRateDao deathRateDao) {
+            List<DeathRate> deathRates = deathRateDao.selectAll();
+            integerDeathRateHashMap = new HashMap<>();
+            for (DeathRate deathRate : deathRates) {
+                Integer age = deathRate.getAge();
+                integerDeathRateHashMap.put(age, deathRate);
+            }
+        }
+
+        public BigDecimal getManDeathRage(int age) {
+            DeathRate deathRate = integerDeathRateHashMap.get(age);
+            String rate = deathRate.getRateManNotOld1();
+            return new BigDecimal(rate);
+        }
+
+        public BigDecimal getWomanDeathRage(int age) {
+            DeathRate deathRate = integerDeathRateHashMap.get(age);
+            String rate = deathRate.getRateWomanNotOld1();
+            return new BigDecimal(rate);
+        }
+    }
 }

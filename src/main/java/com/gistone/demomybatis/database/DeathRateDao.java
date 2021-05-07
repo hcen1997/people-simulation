@@ -2,6 +2,8 @@ package com.gistone.demomybatis.database;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface DeathRateDao {
     int deleteByPrimaryKey(Integer id);
@@ -15,4 +17,6 @@ public interface DeathRateDao {
     int updateByPrimaryKeySelective(DeathRate record);
 
     int updateByPrimaryKey(DeathRate record);
+
+    List<DeathRate> selectAll();
 }
