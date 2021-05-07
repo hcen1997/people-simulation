@@ -21,13 +21,30 @@ public class DataFileService {
     @Autowired
     private BirthPeopleCountDao birthPeopleCountDao;
 
-    public void insertToDb() {
+    public void insert2010PopulationDataToDb() {
+        // 1. 加载文件
+        String file = "ageLocalData2010.cvs";
+        List<String> bornDataFile = getFileByLine("static", file);
+        // 2. 每一行处理 放入数据库obj
+        List<BirthPeopleCount> dbDataList = new ArrayList<>();
+        String template = "(.*?)年：(.*?)万";
+        for (String line : bornDataFile) {
+            String[] strings = processCommentAndTemplate(line, template);
+            if (strings != null) {
+                BirthPeopleCount birthPeopleCount = new BirthPeopleCount(strings);
+                dbDataList.add(birthPeopleCount);
+            }
+        }
+    }
+
+    public void insertBornDataToDb() {
         // 1. 加载文件
         List<String> bornDataFile = getFileByLine("static", born_data_file);
         // 2. 每一行处理 放入数据库obj
         List<BirthPeopleCount> dbDataList = new ArrayList<>();
+        String template = "(.*?)年：(.*?)万";
         for (String line : bornDataFile) {
-            String[] strings = processCommentAndTemplate(line);
+            String[] strings = processCommentAndTemplate(line, template);
             if (strings != null) {
                 BirthPeopleCount birthPeopleCount = new BirthPeopleCount(strings);
                 dbDataList.add(birthPeopleCount);
@@ -55,9 +72,8 @@ public class DataFileService {
         return lines;
     }
 
-    private String[] processCommentAndTemplate(String line) {
+    private String[] processCommentAndTemplate(String line, String template) {
         String slashLineStart = "#";
-        String template = "(.*?)年：(.*?)万";
         if (line.startsWith(slashLineStart)) {
             return null;
         }

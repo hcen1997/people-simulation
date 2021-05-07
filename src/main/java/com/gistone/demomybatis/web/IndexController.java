@@ -60,7 +60,7 @@ public class IndexController {
 
     @GetMapping("/saveBornData")
     public String g58() {
-        dataFileService.insertToDb();
+        dataFileService.insertBornDataToDb();
         return "感谢等待, 数据处理完成, 请在数据库查看";
     }
 
