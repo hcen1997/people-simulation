@@ -5,7 +5,6 @@ import com.gistone.demomybatis.database.DeathRateDao;
 import com.gistone.demomybatis.database.PopulationSexAge;
 import com.gistone.demomybatis.database.PopulationSexAgeDao;
 import com.gistone.demomybatis.web.vo.AgeSexPeople;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -21,17 +20,35 @@ import java.util.Objects;
 public class SimulationService {
 
 
-    @Autowired
-    private DeathRateDao deathRateDao;
-    @Autowired
-    private PopulationSexAgeDao populationSexAgeDao;
+    private final DeathRateDao deathRateDao;
+    private final PopulationSexAgeDao populationSexAgeDao;
+
+    //    * @param deathRateTable   每个年龄的死亡率
+    DeathRateTable deathRateTable;
+
+    public SimulationService(DeathRateDao deathRateDao, PopulationSexAgeDao populationSexAgeDao) {
+        this.deathRateDao = deathRateDao;
+        this.populationSexAgeDao = populationSexAgeDao;
+        deathRateTable = new DeathRateTable(deathRateDao);
+    }
+
+    public void sim2020() {
+        List<PopulationSexAge> simulation2010P = populationSexAgeDao.queryByYear(2010);
+        simulation2010P.removeIf(pp -> pp.getToAge() - pp.getFromAge() > 5);
+        List<AgeSexPeople> simulation2010 = initData(simulation2010P);
+
+        List<AgeSexPeople> simulation2011 = simulation(simulation2010, (long) (1588 * 10000), 117.9);
+        List<AgeSexPeople> simulation2012 = simulation(simulation2011, (long) (1588 * 10000), 117.9);
+        int i = 1;
+    }
 
 
     public void sim2010() {
-        DeathRateTable deathRateTable = new DeathRateTable(deathRateDao);
-        List<PopulationSexAge> populationSexAges = populationSexAgeDao.queryByYear(2010);
-        populationSexAges.removeIf(pp -> pp.getToAge() - pp.getFromAge() > 5);
-        List<AgeSexPeople> simulation = simulation(populationSexAges, deathRateTable, (long) (1588 * 10000), 117.9);
+        List<PopulationSexAge> simulation2010P = populationSexAgeDao.queryByYear(2010);
+        simulation2010P.removeIf(pp -> pp.getToAge() - pp.getFromAge() > 5);
+        List<AgeSexPeople> simulation2010 = initData(simulation2010P);
+
+        List<AgeSexPeople> simulation = simulation(simulation2010, (long) (1588 * 10000), 117.9);
         int i = 1;
     }
 
@@ -42,18 +59,14 @@ public class SimulationService {
      * 3. 对于每个年龄, 根据死亡率算人
      * 4. 返回
      *
-     * @param populationInYear 年度人口分布
-     * @param deathRateTable   每个年龄的死亡率
-     * @param newBorn          当年新增人口
-     * @param manWomanRate     当年新增人口的男女性别比例   108.2d
+     * @param ageSexPeople 年度人口分布
+     * @param newBorn      当年新增人口
+     * @param manWomanRate 当年新增人口的男女性别比例   108.2d
      * @return 下一年的人口分布
      */
     public List<AgeSexPeople> simulation(
-            List<PopulationSexAge> populationInYear,
-            DeathRateTable deathRateTable,
+            List<AgeSexPeople> ageSexPeople,
             Long newBorn, Double manWomanRate) {
-        // 0. 初始化数据
-        List<AgeSexPeople> ageSexPeople = initData(populationInYear);
 //        1. 既有的每人大一岁
         increaseOne(ageSexPeople);
 //        2. 把新出生的放到数据盒子里, 年龄设置为0
