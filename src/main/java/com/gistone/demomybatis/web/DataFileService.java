@@ -32,7 +32,7 @@ public class DataFileService {
         // 2. 每一行处理 放入数据库obj
         List<PopulationSexAge> dbDataList = new ArrayList<>();
 
-        String template = "(.*?)\\s*?(.*?)\\s*?(.*?)";
+        String template = "(\\d*)\\s*(\\d*)\\s*(\\d*)";
         for (int i = 0, bornDataFileSize = bornDataFile.size(), count = 0; i < bornDataFileSize; i++) {
             String line = bornDataFile.get(i);
             String[] strings = processCommentAndTemplate(line, template);
