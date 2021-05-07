@@ -26,8 +26,8 @@ public class PopulationSexAge implements Serializable {
     public PopulationSexAge(int year, String[] data) {
         dataYear = year;
         sum = Long.valueOf(data[0]);
-        man = Long.valueOf(data[0]);
-        woman = Long.valueOf(data[0]);
+        man = Long.valueOf(data[1]);
+        woman = Long.valueOf(data[2]);
     }
 
     public void setFromAndTo(int from, int to) {

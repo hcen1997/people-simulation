@@ -98,6 +98,9 @@ public class DataFileService {
     }
 
     private String[] processCommentAndTemplate(String line, String template) {
+        if (line.length() == 0 || null == line) {
+            return null;
+        }
         String slashLineStart = "#";
         if (line.startsWith(slashLineStart)) {
             return null;

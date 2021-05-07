@@ -2,3 +2,7 @@
 GET http://localhost:7999/api/saveBornData
 
 ####
+###
+GET http://localhost:7999/api/insert2010PopulationDataToDb
+
+####
