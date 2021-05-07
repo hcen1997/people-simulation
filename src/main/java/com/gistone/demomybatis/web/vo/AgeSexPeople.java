@@ -10,6 +10,11 @@ public class AgeSexPeople {
     private Long man;
     private Long woman;
 
+    public void increaseOneYear() {
+        year = year + 1;
+        age = age + 1;
+    }
+
     public AgeSexPeople() {
     }
 

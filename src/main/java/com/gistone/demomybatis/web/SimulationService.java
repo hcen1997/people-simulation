@@ -26,23 +26,49 @@ public class SimulationService {
      * 3. 对于每个年龄, 根据死亡率算人
      * 4. 返回
      *
-     * @param population     年度人口分布
-     * @param deathRateTable 每个年龄的死亡率
-     * @param newBorn        当年新增人口
+     * @param populationInYear 年度人口分布
+     * @param deathRateTable   每个年龄的死亡率
+     * @param newBorn          当年新增人口
+     * @param manWomanRate     当年新增人口的男女性别比例   108.2d
      * @return 下一年的人口分布
      */
     public List<AgeSexPeople> simulation(
             List<PopulationSexAge> populationInYear,
             DeathRateTable deathRateTable,
-            Long newBorn) {
+            Long newBorn, Double manWomanRate) {
         // 0. 初始化数据
         List<AgeSexPeople> ageSexPeople = initData(populationInYear);
 //        1. 既有的每人大一岁
+        increaseOne(ageSexPeople);
+//        2. 把新出生的放到数据盒子里, 年龄设置为0
+        addNewBorn(ageSexPeople, newBorn, manWomanRate);
+//        3. 对于每个年龄, 根据死亡率算人
+        dead(ageSexPeople);
+//        4. 返回
+        return ageSexPeople;
+    }
 
-//                * 2. 把新出生的放到数据盒子里, 年龄设置为0
-//                * 3. 对于每个年龄, 根据死亡率算人
-//                * 4. 返回
-        return null;
+    private void dead(List<AgeSexPeople> ageSexPeople) {
+        // 如果都死了, 比如超过了105岁, 就删除
+    }
+
+    private void addNewBorn(List<AgeSexPeople> ageSexPeople, Long newBorn, Double manWomanRate) {
+        Integer year = ageSexPeople.get(0).getYear();
+        Long newMan = Math.round(newBorn * (manWomanRate / (manWomanRate + 100)));
+        Long newWoman = newBorn - newMan;
+        AgeSexPeople ageSexPerson = new AgeSexPeople(
+                year,
+                0,
+                newMan,
+                newWoman
+        );
+        ageSexPeople.add(ageSexPerson);
+    }
+
+    private void increaseOne(List<AgeSexPeople> ageSexPeople) {
+        for (AgeSexPeople ageSexPerson : ageSexPeople) {
+            ageSexPerson.increaseOneYear();
+        }
     }
 
     private List<AgeSexPeople> initData(List<PopulationSexAge> populationInYear) {
