@@ -43,13 +43,32 @@ public class SimulationService {
 //        2. 把新出生的放到数据盒子里, 年龄设置为0
         addNewBorn(ageSexPeople, newBorn, manWomanRate);
 //        3. 对于每个年龄, 根据死亡率算人
-        dead(ageSexPeople);
+        dead(ageSexPeople, deathRateTable);
 //        4. 返回
         return ageSexPeople;
     }
 
-    private void dead(List<AgeSexPeople> ageSexPeople) {
+    private void dead(List<AgeSexPeople> ageSexPeople, DeathRateTable deathRateTable) {
+        for (AgeSexPeople people : ageSexPeople) {
+            Integer age = people.getAge();
+            BigDecimal manDeathRage = deathRateTable.getManDeathRage(age);
+            BigDecimal womanDeathRage = deathRateTable.getWomanDeathRage(age);
+            // die die die
+            people.setWoman(die(womanDeathRage, people.getWoman()));
+            people.setMan(die(manDeathRage, people.getMan()));
+        }
         // 如果都死了, 比如超过了105岁, 就删除
+        ageSexPeople.removeIf(pp ->
+                pp.getMan().equals(0L) &&
+                        pp.getMan().equals(pp.getWoman())
+        );
+    }
+
+    private long die(BigDecimal womanDeathRage, Long woman) {
+        BigDecimal all = BigDecimal.valueOf(woman);
+        BigDecimal left = all.multiply(BigDecimal.ONE.subtract(womanDeathRage));
+        long longValue = left.longValue();
+        return longValue;
     }
 
     private void addNewBorn(List<AgeSexPeople> ageSexPeople, Long newBorn, Double manWomanRate) {
