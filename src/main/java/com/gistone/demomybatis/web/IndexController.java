@@ -64,5 +64,11 @@ public class IndexController {
         return "感谢等待, 数据处理完成, 请在数据库查看";
     }
 
+    @GetMapping("/insert2010PopulationDataToDb")
+    public String g67() {
+        dataFileService.insert2010PopulationDataToDb();
+        return "感谢等待, 数据处理完成, 请在数据库查看";
+    }
+
 
 }

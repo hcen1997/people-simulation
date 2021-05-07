@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gistone.demomybatis.database.PopulationSexAgeDao">
+    <resultMap id="BaseResultMap" type="com.gistone.demomybatis.database.PopulationSexAge">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="data_year" jdbcType="INTEGER" property="dataYear"/>
+        <result column="from_age" jdbcType="INTEGER" property="fromAge"/>
+        <result column="to_age" jdbcType="INTEGER" property="toAge"/>
+        <result column="sum" jdbcType="BIGINT" property="sum"/>
+        <result column="man" jdbcType="BIGINT" property="man"/>
+        <result column="woman" jdbcType="BIGINT" property="woman"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, data_year, from_age, to_age, `sum`, man, woman
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from population_sex_age
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from population_sex_age
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id"
+            parameterType="com.gistone.demomybatis.database.PopulationSexAge" useGeneratedKeys="true">
+        insert into population_sex_age (data_year, from_age, to_age,
+        `sum`, man, woman)
+        values (#{dataYear,jdbcType=INTEGER}, #{fromAge,jdbcType=INTEGER}, #{toAge,jdbcType=INTEGER},
+        #{sum,jdbcType=BIGINT}, #{man,jdbcType=BIGINT}, #{woman,jdbcType=BIGINT})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.gistone.demomybatis.database.PopulationSexAge" useGeneratedKeys="true">
+        insert into population_sex_age
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dataYear != null">
+                data_year,
+            </if>
+            <if test="fromAge != null">
+                from_age,
+            </if>
+            <if test="toAge != null">
+                to_age,
+            </if>
+            <if test="sum != null">
+                `sum`,
+            </if>
+            <if test="man != null">
+                man,
+            </if>
+            <if test="woman != null">
+                woman,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dataYear != null">
+                #{dataYear,jdbcType=INTEGER},
+            </if>
+            <if test="fromAge != null">
+                #{fromAge,jdbcType=INTEGER},
+            </if>
+            <if test="toAge != null">
+                #{toAge,jdbcType=INTEGER},
+            </if>
+            <if test="sum != null">
+                #{sum,jdbcType=BIGINT},
+            </if>
+            <if test="man != null">
+                #{man,jdbcType=BIGINT},
+            </if>
+            <if test="woman != null">
+                #{woman,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gistone.demomybatis.database.PopulationSexAge">
+        update population_sex_age
+        <set>
+            <if test="dataYear != null">
+                data_year = #{dataYear,jdbcType=INTEGER},
+            </if>
+            <if test="fromAge != null">
+                from_age = #{fromAge,jdbcType=INTEGER},
+            </if>
+            <if test="toAge != null">
+                to_age = #{toAge,jdbcType=INTEGER},
+            </if>
+            <if test="sum != null">
+                `sum` = #{sum,jdbcType=BIGINT},
+            </if>
+            <if test="man != null">
+                man = #{man,jdbcType=BIGINT},
+            </if>
+            <if test="woman != null">
+                woman = #{woman,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.gistone.demomybatis.database.PopulationSexAge">
+        update population_sex_age
+        set data_year = #{dataYear,jdbcType=INTEGER},
+        from_age = #{fromAge,jdbcType=INTEGER},
+        to_age = #{toAge,jdbcType=INTEGER},
+        `sum` = #{sum,jdbcType=BIGINT},
+        man = #{man,jdbcType=BIGINT},
+        woman = #{woman,jdbcType=BIGINT}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
