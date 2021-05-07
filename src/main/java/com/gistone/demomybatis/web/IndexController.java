@@ -3,6 +3,7 @@ package com.gistone.demomybatis.web;
 
 import com.gistone.demomybatis.web.vo.InsertResult;
 import com.gistone.demomybatis.web.vo.PackInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,6 +14,8 @@ import java.util.List;
 public class IndexController {
 
     private final StudentService studentService;
+    @Autowired
+    private DataFileService dataFileService;
 
     public IndexController(StudentService studentService) {
         this.studentService = studentService;
@@ -52,6 +55,13 @@ public class IndexController {
     public String g51(@RequestBody PackInfo packInfo) {
         studentService.generateStatisticForeach(packInfo.getTotal(), 10000);
         return "感谢等待, pack生成数据完成, 请在数据库查看";
+    }
+
+
+    @GetMapping("/saveBornData")
+    public String g58() {
+        dataFileService.insertToDb();
+        return "感谢等待, 数据处理完成, 请在数据库查看";
     }
 
 
