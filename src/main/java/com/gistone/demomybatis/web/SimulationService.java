@@ -30,6 +30,7 @@ public class SimulationService {
     public void sim2010() {
         DeathRateTable deathRateTable = new DeathRateTable(deathRateDao);
         List<PopulationSexAge> populationSexAges = populationSexAgeDao.queryByYear(2010);
+        populationSexAges.removeIf(pp -> pp.getToAge() - pp.getFromAge() > 5);
         List<AgeSexPeople> simulation = simulation(populationSexAges, deathRateTable, (long) (1588 * 10000), 117.9);
         int i = 1;
     }
@@ -120,6 +121,9 @@ public class SimulationService {
                     aa.setAge(fromAge);
                     result.add(aa);
                 } else {
+                    int totalCount = toAge - fromAge + 1;
+                    aa.setMan(aa.getMan() / totalCount);
+                    aa.setWoman(aa.getWoman() / totalCount);
                     for (int age = fromAge; age <= toAge; age++) {
                         aa.setAge(age);
                         result.add(aa.copy());

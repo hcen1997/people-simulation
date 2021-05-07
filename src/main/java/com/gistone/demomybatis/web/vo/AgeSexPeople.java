@@ -30,12 +30,7 @@ public class AgeSexPeople {
     }
 
     public AgeSexPeople copy() {
-        try {
-            return (AgeSexPeople) this.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return new AgeSexPeople(year, age, man, woman);
     }
 
     @Override
