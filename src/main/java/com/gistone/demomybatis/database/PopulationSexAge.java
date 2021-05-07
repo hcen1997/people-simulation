@@ -1,5 +1,6 @@
 package com.gistone.demomybatis.database;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.io.Serializable;
  * @author
  */
 @Data
+@AllArgsConstructor
 public class PopulationSexAge implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer id;

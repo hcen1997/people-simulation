@@ -31,6 +31,7 @@ public class SimulationService {
         DeathRateTable deathRateTable = new DeathRateTable(deathRateDao);
         List<PopulationSexAge> populationSexAges = populationSexAgeDao.queryByYear(2010);
         List<AgeSexPeople> simulation = simulation(populationSexAges, deathRateTable, (long) (1588 * 10000), 117.9);
+        int i = 1;
     }
 
     /**
