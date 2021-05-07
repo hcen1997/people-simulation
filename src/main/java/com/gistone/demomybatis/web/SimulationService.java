@@ -54,8 +54,8 @@ public class SimulationService {
             BigDecimal manDeathRage = deathRateTable.getManDeathRage(age);
             BigDecimal womanDeathRage = deathRateTable.getWomanDeathRage(age);
             // die die die
-            people.setWoman(die(womanDeathRage, people.getWoman()));
             people.setMan(die(manDeathRage, people.getMan()));
+            people.setWoman(die(womanDeathRage, people.getWoman()));
         }
         // 如果都死了, 比如超过了105岁, 就删除
         ageSexPeople.removeIf(pp ->
