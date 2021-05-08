@@ -43,7 +43,7 @@ public class SimulationService {
         setYearManRateMap(yearManRateMap);
 
         final int fromYear = 2010;
-        final int toYear = 2020;
+        final int toYear = 2040;
 
         List<AgeSexPeople> simulationThisYear = simulation2010;
         printInfo(simulationThisYear);
