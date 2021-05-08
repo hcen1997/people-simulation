@@ -5,6 +5,7 @@ import com.gistone.demomybatis.database.DeathRateDao;
 import com.gistone.demomybatis.database.PopulationSexAge;
 import com.gistone.demomybatis.database.PopulationSexAgeDao;
 import com.gistone.demomybatis.web.vo.AgeSexPeople;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -17,6 +18,7 @@ import java.util.Objects;
  * 按照算法模拟每年的出生人口,死亡人口, 并存入数据库
  */
 @Service
+@Slf4j
 public class SimulationService {
 
 
@@ -39,6 +41,14 @@ public class SimulationService {
 
         List<AgeSexPeople> simulation2011 = simulation(simulation2010, (long) (1588 * 10000), 117.9);
         List<AgeSexPeople> simulation2012 = simulation(simulation2011, (long) (1588 * 10000), 117.9);
+        List<AgeSexPeople> simulation2013 = simulation(simulation2012, (long) (1588 * 10000), 117.9);
+        List<AgeSexPeople> simulation2014 = simulation(simulation2013, (long) (1588 * 10000), 117.9);
+        List<AgeSexPeople> simulation2015 = simulation(simulation2014, (long) (1588 * 10000), 117.9);
+        List<AgeSexPeople> simulation2016 = simulation(simulation2015, (long) (1588 * 10000), 117.9);
+        List<AgeSexPeople> simulation2017 = simulation(simulation2016, (long) (1588 * 10000), 117.9);
+        List<AgeSexPeople> simulation2018 = simulation(simulation2017, (long) (1588 * 10000), 117.9);
+        List<AgeSexPeople> simulation2019 = simulation(simulation2018, (long) (1588 * 10000), 117.9);
+        List<AgeSexPeople> simulation2020 = simulation(simulation2019, (long) (1588 * 10000), 117.9);
         int i = 1;
     }
 
@@ -74,7 +84,18 @@ public class SimulationService {
 //        3. 对于每个年龄, 根据死亡率算人
         dead(ageSexPeople, deathRateTable);
 //        4. 返回
+        printInfo(ageSexPeople);
         return ageSexPeople;
+    }
+
+    private void printInfo(List<AgeSexPeople> ageSexPeople) {
+        Integer year = ageSexPeople.get(0).getYear();
+        Long sum = 0l;
+        for (AgeSexPeople ageSexPerson : ageSexPeople) {
+            sum = sum + ageSexPerson.getSum();
+        }
+        // 总人口
+        log.debug(year + "年 总人口为 " + sum);
     }
 
     private void dead(List<AgeSexPeople> ageSexPeople, DeathRateTable deathRateTable) {

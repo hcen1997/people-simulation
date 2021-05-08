@@ -79,5 +79,11 @@ public class IndexController {
         return "模拟成功";
     }
 
+    @GetMapping("/sim2020")
+    public String s82() {
+        simulationService.sim2020();
+        return "模拟成功";
+    }
+
 
 }
