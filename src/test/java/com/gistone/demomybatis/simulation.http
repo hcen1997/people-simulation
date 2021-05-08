@@ -2,5 +2,8 @@
 GET http://localhost:7999/api/sim2010
 
 ####
+GET http://localhost:7999/api/sim2020
+
+####
 
 ####

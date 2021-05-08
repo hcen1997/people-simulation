@@ -9,10 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * 按照算法模拟每年的出生人口,死亡人口, 并存入数据库
@@ -39,16 +36,42 @@ public class SimulationService {
         simulation2010P.removeIf(pp -> pp.getToAge() - pp.getFromAge() > 5);
         List<AgeSexPeople> simulation2010 = initData(simulation2010P);
 
-        List<AgeSexPeople> simulation2011 = simulation(simulation2010, (long) (1588 * 10000), 117.9);
-        List<AgeSexPeople> simulation2012 = simulation(simulation2011, (long) (1588 * 10000), 117.9);
-        List<AgeSexPeople> simulation2013 = simulation(simulation2012, (long) (1588 * 10000), 117.9);
-        List<AgeSexPeople> simulation2014 = simulation(simulation2013, (long) (1588 * 10000), 117.9);
-        List<AgeSexPeople> simulation2015 = simulation(simulation2014, (long) (1588 * 10000), 117.9);
-        List<AgeSexPeople> simulation2016 = simulation(simulation2015, (long) (1588 * 10000), 117.9);
-        List<AgeSexPeople> simulation2017 = simulation(simulation2016, (long) (1588 * 10000), 117.9);
-        List<AgeSexPeople> simulation2018 = simulation(simulation2017, (long) (1588 * 10000), 117.9);
-        List<AgeSexPeople> simulation2019 = simulation(simulation2018, (long) (1588 * 10000), 117.9);
-        List<AgeSexPeople> simulation2020 = simulation(simulation2019, (long) (1588 * 10000), 117.9);
+        Map<Integer, Long> yearBornMap = new HashMap<>();
+        yearBornMap.put(2010, (long) (1588 * 10000));
+        yearBornMap.put(2011, (long) (1600 * 10000));
+        yearBornMap.put(2012, (long) (1635 * 10000));
+        yearBornMap.put(2013, (long) (1640 * 10000));
+        yearBornMap.put(2014, (long) (1687 * 10000));
+        yearBornMap.put(2015, (long) (1655 * 10000));
+        yearBornMap.put(2016, (long) (1786 * 10000));
+        yearBornMap.put(2017, (long) (1723 * 10000));
+        yearBornMap.put(2018, (long) (1523 * 10000));
+        yearBornMap.put(2019, (long) (1465 * 10000));
+        yearBornMap.put(2020, (long) (1300 * 10000));
+
+        Map<Integer, Double> yearManRateMap = new HashMap<>();
+        yearManRateMap.put(2010, 117.9);
+        yearManRateMap.put(2011, 116.9);
+        yearManRateMap.put(2012, 115.9);
+        yearManRateMap.put(2013, 114.9);
+        yearManRateMap.put(2014, 113.9);
+        yearManRateMap.put(2015, 113.5);
+        yearManRateMap.put(2016, 113.4);
+        yearManRateMap.put(2017, 111.9);
+        yearManRateMap.put(2018, 110.9);
+        yearManRateMap.put(2019, 109.9);
+
+
+        List<AgeSexPeople> simulation2011 = simulation(simulation2010, yearBornMap.get(2010), yearManRateMap.get(2010));
+        List<AgeSexPeople> simulation2012 = simulation(simulation2011, yearBornMap.get(2011), yearManRateMap.get(2011));
+        List<AgeSexPeople> simulation2013 = simulation(simulation2012, yearBornMap.get(2012), yearManRateMap.get(2012));
+        List<AgeSexPeople> simulation2014 = simulation(simulation2013, yearBornMap.get(2013), yearManRateMap.get(2013));
+        List<AgeSexPeople> simulation2015 = simulation(simulation2014, yearBornMap.get(2014), yearManRateMap.get(2014));
+        List<AgeSexPeople> simulation2016 = simulation(simulation2015, yearBornMap.get(2015), yearManRateMap.get(2015));
+        List<AgeSexPeople> simulation2017 = simulation(simulation2016, yearBornMap.get(2016), yearManRateMap.get(2016));
+        List<AgeSexPeople> simulation2018 = simulation(simulation2017, yearBornMap.get(2017), yearManRateMap.get(2017));
+        List<AgeSexPeople> simulation2019 = simulation(simulation2018, yearBornMap.get(2018), yearManRateMap.get(2018));
+        List<AgeSexPeople> simulation2020 = simulation(simulation2019, yearBornMap.get(2019), yearManRateMap.get(2019));
         int i = 1;
     }
 

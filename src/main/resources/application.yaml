@@ -9,7 +9,7 @@ server:
 logging:
   level:
     org.springframework.web: debug
-
+    com.gistone.demomybatis: debug
 debug: on
 
 mybatis:
