@@ -37,29 +37,10 @@ public class SimulationService {
         List<AgeSexPeople> simulation2010 = initData(simulation2010P);
 
         Map<Integer, Long> yearBornMap = new HashMap<>();
-        yearBornMap.put(2010, (long) (1588 * 10000));
-        yearBornMap.put(2011, (long) (1600 * 10000));
-        yearBornMap.put(2012, (long) (1635 * 10000));
-        yearBornMap.put(2013, (long) (1640 * 10000));
-        yearBornMap.put(2014, (long) (1687 * 10000));
-        yearBornMap.put(2015, (long) (1655 * 10000));
-        yearBornMap.put(2016, (long) (1786 * 10000));
-        yearBornMap.put(2017, (long) (1723 * 10000));
-        yearBornMap.put(2018, (long) (1523 * 10000));
-        yearBornMap.put(2019, (long) (1465 * 10000));
-        yearBornMap.put(2020, (long) (1300 * 10000));
+        setYearBornMap(yearBornMap);
 
         Map<Integer, Double> yearManRateMap = new HashMap<>();
-        yearManRateMap.put(2010, 117.9);
-        yearManRateMap.put(2011, 116.9);
-        yearManRateMap.put(2012, 115.9);
-        yearManRateMap.put(2013, 114.9);
-        yearManRateMap.put(2014, 113.9);
-        yearManRateMap.put(2015, 113.5);
-        yearManRateMap.put(2016, 113.4);
-        yearManRateMap.put(2017, 111.9);
-        yearManRateMap.put(2018, 110.9);
-        yearManRateMap.put(2019, 109.9);
+        setYearManRateMap(yearManRateMap);
 
         final int fromYear = 2010;
         final int toYear = 2020;
@@ -75,6 +56,78 @@ public class SimulationService {
 
 
         int i = 1;
+    }
+
+    private void setYearManRateMap(Map<Integer, Double> yearManRateMap) {
+        yearManRateMap.put(2010, 117.9);
+        yearManRateMap.put(2011, 116.9);
+        yearManRateMap.put(2012, 115.9);
+        yearManRateMap.put(2013, 114.9);
+        yearManRateMap.put(2014, 113.9);
+        yearManRateMap.put(2015, 113.5);
+        yearManRateMap.put(2016, 113.4);
+        yearManRateMap.put(2017, 111.9);
+        yearManRateMap.put(2018, 110.9);
+        yearManRateMap.put(2019, 109.9);
+        yearManRateMap.put(2020, 109.9);
+        yearManRateMap.put(2021, 109.9);
+        yearManRateMap.put(2022, 109.8);
+        yearManRateMap.put(2023, 109.7);
+        yearManRateMap.put(2024, 109.6);
+        yearManRateMap.put(2025, 109.5);
+        yearManRateMap.put(2026, 109.4);
+        yearManRateMap.put(2027, 109.3);
+        yearManRateMap.put(2028, 109.2);
+        yearManRateMap.put(2029, 109.1);
+        yearManRateMap.put(2030, 109.0);
+        yearManRateMap.put(2031, 108.9);
+        yearManRateMap.put(2032, 108.8);
+        yearManRateMap.put(2033, 108.7);
+        yearManRateMap.put(2034, 108.6);
+        yearManRateMap.put(2035, 108.5);
+        yearManRateMap.put(2036, 108.4);
+        yearManRateMap.put(2037, 108.3);
+        yearManRateMap.put(2038, 108.2);
+        yearManRateMap.put(2039, 108.0);
+        yearManRateMap.put(2040, 108.0);
+        yearManRateMap.put(2041, 108.0);
+        yearManRateMap.put(2042, 108.0);
+    }
+
+    private void setYearBornMap(Map<Integer, Long> yearBornMap) {
+        yearBornMap.put(2010, (long) (1588 * 10000));
+        yearBornMap.put(2011, (long) (1600 * 10000));
+        yearBornMap.put(2012, (long) (1635 * 10000));
+        yearBornMap.put(2013, (long) (1640 * 10000));
+        yearBornMap.put(2014, (long) (1687 * 10000));
+        yearBornMap.put(2015, (long) (1655 * 10000));
+        yearBornMap.put(2016, (long) (1786 * 10000));
+        yearBornMap.put(2017, (long) (1723 * 10000));
+        yearBornMap.put(2018, (long) (1523 * 10000));
+        yearBornMap.put(2019, (long) (1465 * 10000));
+        yearBornMap.put(2020, (long) (1302 * 10000));
+        yearBornMap.put(2021, (long) (1301 * 10000));
+        yearBornMap.put(2022, (long) (1300 * 10000));
+        yearBornMap.put(2023, (long) (1299 * 10000));
+        yearBornMap.put(2024, (long) (1298 * 10000));
+        yearBornMap.put(2025, (long) (1297 * 10000));
+        yearBornMap.put(2026, (long) (1296 * 10000));
+        yearBornMap.put(2027, (long) (1295 * 10000));
+        yearBornMap.put(2028, (long) (1294 * 10000));
+        yearBornMap.put(2029, (long) (1293 * 10000));
+        yearBornMap.put(2030, (long) (1292 * 10000));
+        yearBornMap.put(2031, (long) (1291 * 10000));
+        yearBornMap.put(2032, (long) (1290 * 10000));
+        yearBornMap.put(2033, (long) (1289 * 10000));
+        yearBornMap.put(2034, (long) (1288 * 10000));
+        yearBornMap.put(2035, (long) (1287 * 10000));
+        yearBornMap.put(2036, (long) (1286 * 10000));
+        yearBornMap.put(2037, (long) (1285 * 10000));
+        yearBornMap.put(2038, (long) (1284 * 10000));
+        yearBornMap.put(2039, (long) (1283 * 10000));
+        yearBornMap.put(2040, (long) (1282 * 10000));
+        yearBornMap.put(2041, (long) (1281 * 10000));
+        yearBornMap.put(2042, (long) (1280 * 10000));
     }
 
 
