@@ -107,6 +107,7 @@ public class SimulationService {
 //        3. 对于每个年龄, 根据死亡率算人
         dead(ageSexPeople, deathRateTable);
 //        4. 返回
+        ageSexPeople.sort(Comparator.comparingInt(AgeSexPeople::getAge));
         printInfo(ageSexPeople);
         return ageSexPeople;
     }
@@ -114,11 +115,26 @@ public class SimulationService {
     private void printInfo(List<AgeSexPeople> ageSexPeople) {
         Integer year = ageSexPeople.get(0).getYear();
         Long sum = 0l;
-        for (AgeSexPeople ageSexPerson : ageSexPeople) {
-            sum = sum + ageSexPerson.getSum();
+        for (AgeSexPeople person : ageSexPeople) {
+            sum = sum + person.getSum();
         }
         // 总人口
         log.debug(year + "年 总人口为 " + sum);
+
+        分年龄段计数(ageSexPeople, year, 0, 22);
+        分年龄段计数(ageSexPeople, year, 23, 60);
+        分年龄段计数(ageSexPeople, year, 61, 105);
+    }
+
+    private void 分年龄段计数(List<AgeSexPeople> ageSexPeople, Integer year, int min, int max) {
+        Long sum1 = 0l;
+        for (AgeSexPeople person : ageSexPeople) {
+            if (person.getAge() >= min
+                    && person.getAge() <= max) {
+                sum1 = sum1 + person.getSum();
+            }
+        }
+        log.debug(String.format("    %d年 年龄段为  %3d -%3d 总计为 %12d", year, min, max, sum1));
     }
 
     private void dead(List<AgeSexPeople> ageSexPeople, DeathRateTable deathRateTable) {
