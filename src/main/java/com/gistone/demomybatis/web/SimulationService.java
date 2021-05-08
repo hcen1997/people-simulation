@@ -61,17 +61,19 @@ public class SimulationService {
         yearManRateMap.put(2018, 110.9);
         yearManRateMap.put(2019, 109.9);
 
+        final int fromYear = 2010;
+        final int toYear = 2020;
 
-        List<AgeSexPeople> simulation2011 = simulation(simulation2010, yearBornMap.get(2010), yearManRateMap.get(2010));
-        List<AgeSexPeople> simulation2012 = simulation(simulation2011, yearBornMap.get(2011), yearManRateMap.get(2011));
-        List<AgeSexPeople> simulation2013 = simulation(simulation2012, yearBornMap.get(2012), yearManRateMap.get(2012));
-        List<AgeSexPeople> simulation2014 = simulation(simulation2013, yearBornMap.get(2013), yearManRateMap.get(2013));
-        List<AgeSexPeople> simulation2015 = simulation(simulation2014, yearBornMap.get(2014), yearManRateMap.get(2014));
-        List<AgeSexPeople> simulation2016 = simulation(simulation2015, yearBornMap.get(2015), yearManRateMap.get(2015));
-        List<AgeSexPeople> simulation2017 = simulation(simulation2016, yearBornMap.get(2016), yearManRateMap.get(2016));
-        List<AgeSexPeople> simulation2018 = simulation(simulation2017, yearBornMap.get(2017), yearManRateMap.get(2017));
-        List<AgeSexPeople> simulation2019 = simulation(simulation2018, yearBornMap.get(2018), yearManRateMap.get(2018));
-        List<AgeSexPeople> simulation2020 = simulation(simulation2019, yearBornMap.get(2019), yearManRateMap.get(2019));
+        List<AgeSexPeople> simulationThisYear = simulation2010;
+        printInfo(simulationThisYear);
+        for (int curYear = fromYear; curYear <= toYear; curYear++) {
+            List<AgeSexPeople> simulationNextYear = simulation(simulationThisYear, yearBornMap.get(2010), yearManRateMap.get(2010));
+            printInfo(simulationNextYear);
+
+            simulationThisYear = simulationNextYear;
+        }
+
+
         int i = 1;
     }
 
@@ -108,7 +110,6 @@ public class SimulationService {
         dead(ageSexPeople, deathRateTable);
 //        4. 返回
         ageSexPeople.sort(Comparator.comparingInt(AgeSexPeople::getAge));
-        printInfo(ageSexPeople);
         return ageSexPeople;
     }
 
